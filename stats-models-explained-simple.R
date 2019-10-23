@@ -2,6 +2,16 @@
 png("stats-models-explained-simple.png", width = 1100, height = 1000, pointsize = 24)
 opar = par(mfrow = c(2, 2))
 
+## Plot function
+do_plot = function(main = "MAIN", pch = 1){
+  pch = rep(pch, length = 2)
+  with(dat, {
+    plot(0:11, 0:11, type = "n", main = main, xlab = "x", ylab = "y")
+    points(x[group == "A"], y[group == "A"], pch = pch[1])
+    points(x[group == "B"], y[group == "B"], pch = pch[2])
+  })
+}
+
 ## Generate Data
 set.seed(20191023)
 dat = data.frame(
@@ -12,14 +22,6 @@ dat = data.frame(
     3 + 1:10 * 0.5 + rnorm(10, 0, 0.5)
   )
 )
-do_plot = function(main = "MAIN", pch = 1){
-  pch = rep(pch, length = 2)
-  with(dat, {
-    plot(0:11, 0:11, type = "n", main = main, xlab = "x", ylab = "y")
-    points(x[group == "A"], y[group == "A"], pch = pch[1])
-    points(x[group == "B"], y[group == "B"], pch = pch[2])
-  })
-}
 do_plot("1. We have some data")
 
 ## Simple Model
